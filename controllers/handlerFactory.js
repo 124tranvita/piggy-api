@@ -71,7 +71,7 @@ exports.getAll = Model =>
   catchAsync(async (req, res, next) => {
     let filter = {};
 
-    if (req.body.wallet) filter = { wallet: req.body.wallet };
+    if (req.user) filter = { user: req.user.id };
 
     const features = new APIFeatures(Model.find(filter), req.query)
       .filter()

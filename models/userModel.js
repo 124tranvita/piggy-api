@@ -43,7 +43,15 @@ const userSchema = new mongoose.Schema(
         message: 'Password are not the same.'
       }
     },
-    passwordChangedAt: Date
+    passwordChangedAt: Date,
+    income: {
+      type: Number,
+      default: 0
+    },
+    spending: {
+      type: Number,
+      default: 0
+    }
   },
   {
     toJSON: { virtuals: true },
@@ -51,32 +59,19 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Virtual populate
+// Virtual populate for Catalogue
 userSchema.virtual('catalogues', {
   ref: 'Catalogue',
   foreignField: 'user',
   localField: '_id'
 });
 
-userSchema.virtual('wallets', {
-  ref: 'Wallet',
-  foreignField: 'user',
-  localField: '_id'
+// Virtual balance field
+userSchema.virtual('balance').get(function() {
+  return this.income - this.spending;
 });
 
 // MIDDLEWARE
-userSchema.pre(/^find/, function(next) {
-  this.populate({
-    path: 'wallets',
-    select: '_id name'
-  }).populate({
-    path: 'catalogues',
-    select: '_id name'
-  });
-
-  next();
-});
-
 // Encrypted user's password
 userSchema.pre('save', async function(next) {
   // Only run this function if password was actually modified

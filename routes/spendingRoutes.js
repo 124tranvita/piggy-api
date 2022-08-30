@@ -16,7 +16,7 @@ router
 router
   .route('/')
   .get(spendingController.getAllSpendings)
-  .post(spendingController.setWalletId, spendingController.createSpending);
+  .post(spendingController.createSpending);
 
 router
   .route('/:id')

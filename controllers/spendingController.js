@@ -3,14 +3,9 @@ const Spending = require('./../models/spendingModel');
 const catchAsync = require('./../utils/catchAsync');
 const handlerFactory = require('./handlerFactory');
 
-exports.setWalletId = (req, res, next) => {
-  if (!req.body.wallet) req.body.wallet = req.params.walletId;
-  next();
-};
-
 exports.getAllSpendings = handlerFactory.getAll(Spending);
-exports.getSpending = handlerFactory.getOne(Spending, { path: 'wallet' });
-exports.createSpending = handlerFactory.createOne(Spending);
+exports.getSpending = handlerFactory.getOne(Spending);
+exports.createSpending = handlerFactory.createOne(Spending, true);
 exports.updateSpending = handlerFactory.updateOne(Spending);
 exports.deleteSpending = handlerFactory.deleteOne(Spending);
 

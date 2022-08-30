@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
 const userRouter = require('./routes/userRoutes');
-const walletRouter = require('./routes/walletRoutes');
 const incomeRouter = require('./routes/incomeRoutes');
 const catalogueRouter = require('./routes/catalogueRoutes');
 const spendingRouter = require('./routes/spendingRoutes');
@@ -24,7 +23,6 @@ app.use(bodyParser.json());
 
 // 2) ROUTES
 app.use('/api/v1/users', userRouter);
-app.use('/api/v1/wallets', walletRouter);
 app.use('/api/v1/incomes', incomeRouter);
 app.use('/api/v1/catalogues', catalogueRouter);
 app.use('/api/v1/spendings', spendingRouter);

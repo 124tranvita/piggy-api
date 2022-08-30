@@ -4,14 +4,9 @@ const handlerFactory = require('./handlerFactory');
 const catchAsync = require('./../utils/catchAsync');
 // const AppError = require('./../utils/appError');
 
-exports.setWalletId = (req, res, next) => {
-  if (!req.body.wallet) req.body.wallet = req.params.walletId;
-  next();
-};
-
 exports.getAllIncomes = handlerFactory.getAll(Income);
-exports.getIncome = handlerFactory.getOne(Income, { path: 'wallet' });
-exports.createIncome = handlerFactory.createOne(Income);
+exports.getIncome = handlerFactory.getOne(Income);
+exports.createIncome = handlerFactory.createOne(Income, true);
 exports.updateIncome = handlerFactory.updateOne(Income);
 exports.deleteIncome = handlerFactory.deleteOne(Income);
 

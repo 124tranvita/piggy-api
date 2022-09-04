@@ -7,12 +7,15 @@ const handleCastErrorDB = err => {
 };
 
 const handleDuplicateFieldsBD = err => {
-  const message = `Duplicate field value: ${err.keyValue.name}. Please use another value!`;
+  const message = `Duplicate field value: ${JSON.stringify(
+    err.keyValue
+  ).replaceAll('"', '')}. Please use another value!`;
   return new AppError(message, 400);
 };
 
 const handleValidationErrorDB = err => {
   const errors = Object.values(err.errors).map(el => el.message);
+
   const message = `Invalid input data. ${errors.join('. ')}`;
   return new AppError(message, 400);
 };
@@ -53,14 +56,15 @@ module.exports = (err, req, res, next) => {
   if (process.env.NODE_ENV === 'development') {
     sendErrorDev(err, res);
   } else if (process.env.NODE_ENV === 'production') {
-    let error = { ...err };
+    let error = Object.assign(err);
 
     // Mongoose bad ObjectId
-    if (err.name === 'CastError') error = handleCastErrorDB(error);
+    if (error.name === 'CastError') error = handleCastErrorDB(error);
     // Mongoose duplicate DB field
-    if (err.code === 11000) error = handleDuplicateFieldsBD(error);
+    if (error.code === 11000) error = handleDuplicateFieldsBD(error);
     // Mongoose validate
-    if (err.name === 'ValidationError') error = handleValidationErrorDB(error);
+    if (error.name === 'ValidationError')
+      error = handleValidationErrorDB(error);
 
     sendErrorProd(error, res);
   }

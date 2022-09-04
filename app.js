@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
+const cors = require('cors');
 
 const userRouter = require('./routes/userRoutes');
 const incomeRouter = require('./routes/incomeRoutes');
@@ -11,6 +12,8 @@ const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
 const app = express();
+
+app.use(cors());
 
 // 1) GLOBAL MIDDLEWARE
 // Development logging

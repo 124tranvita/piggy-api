@@ -4,8 +4,9 @@
   "description": "simple and easy budget management project",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon server.js",
-    "start:prod": "NODE_ENV=production nodemon server.js",
+    "start": "node server.js",
+    "start:prod": "NODE_ENV=production node server.js",
+    "start:prodmon": "NODE_ENV=production nodemon server.js",
     "debug": "nodemon --inspect server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

@@ -12,6 +12,9 @@ router
   .route('/monthly-spending/:year')
   .get(spendingController.getMonthlySpendingStats);
 
+router.get('/catalogue/:id', spendingController.getSpendingByCatalogue);
+router.get('/from/:from/to/:to', spendingController.getSpendingInPeriod);
+
 // Basic routes
 router
   .route('/')

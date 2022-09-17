@@ -66,6 +66,20 @@ userSchema.virtual('catalogues', {
   localField: '_id'
 });
 
+// Virtual populate for Incomes
+userSchema.virtual('incomes', {
+  ref: 'Income',
+  foreignField: 'user',
+  localField: '_id'
+});
+
+// Virtual populate for Spendings
+userSchema.virtual('spendings', {
+  ref: 'Spending',
+  foreignField: 'user',
+  localField: '_id'
+});
+
 // Virtual balance field
 userSchema.virtual('balance').get(function() {
   return this.income - this.spending;

@@ -81,6 +81,25 @@ spendingSchema.statics.calcSumTotal = async function(userId) {
 };
 
 // MIDDLEWARE
+// Virtual populate
+spendingSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'catalogue',
+    select: 'name'
+  });
+
+  next();
+});
+
+spendingSchema.pre('save', function(next) {
+  this.populate({
+    path: 'catalogue',
+    select: 'name'
+  });
+
+  next();
+});
+
 // Calcalate the sum of amount after income document is created (Document middleware)
 spendingSchema.post('save', function() {
   this.constructor.calcSumTotal(this.user);

@@ -5,7 +5,6 @@ const catalogueSchema = new mongoose.Schema(
     name: {
       type: String,
       required: [true, 'Catalogue must have a name.'],
-      unique: true,
       maxlength: [
         16,
         'Catalogue name must have lesser or equal to 16 characters.'
@@ -32,11 +31,11 @@ const catalogueSchema = new mongoose.Schema(
 );
 
 // Virtual populate
-catalogueSchema.virtual('spendings', {
-  ref: 'Spending',
-  localField: '_id',
-  foreignField: 'catalogue'
-});
+// catalogueSchema.virtual('spendings', {
+//   ref: 'Spending',
+//   localField: '_id',
+//   foreignField: 'catalogue'
+// });
 
 const Catalogue = mongoose.model('Catalogue', catalogueSchema);
 

@@ -23,6 +23,8 @@ router.use('/:userId/catalogues', catalogueRouter);
 // Need to be authenticated routes
 router.patch('/updateMyPassword', authController.updatePassword);
 
+router.get('/user-stats', userController.getUserStats);
+
 // Basic routes
 router
   .route('/')

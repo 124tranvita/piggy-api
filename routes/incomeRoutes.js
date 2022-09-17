@@ -10,6 +10,7 @@ router.use(authController.protect);
 // Advanced routes
 router.route('/month-incomes/:month').get(incomeController.getMonthIncomes);
 router.route('/year-incomes/:year').get(incomeController.getYearIncomes);
+router.get('/from/:from/to/:to', incomeController.getIncomeInPeriod);
 
 // Basic routes
 router

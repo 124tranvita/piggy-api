@@ -1,7 +1,7 @@
 {
-  "name": "mmo-api",
+  "name": "piggy-api",
   "version": "1.0.0",
-  "description": "simple manage money online web app",
+  "description": "simple and easy budget management project",
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
